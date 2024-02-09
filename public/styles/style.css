@@ -1,0 +1,17 @@
+.listingImage img{
+    height: 200px;
+    width: 200px;
+}
+.container{
+    width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+.listing{
+    border: 2px solid black;
+    margin: 1%;
+    height:10%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}

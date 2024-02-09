@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirBnB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>All Listings</h1>
+    <div class="container">
+        <% for(let listing of listings){ %>
+            <div class="listing">
+                <div class="listingImage">
+                    <img src="<%=listing.image%>" alt="img">
+                </div>
+                <a href="/listings/<%=listing._id%>"><h3><%= listing.title%></h3></a>
+                <b>Price: &#x20B9;<%=listing.price.toLocaleString("en-IN")%></b>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
