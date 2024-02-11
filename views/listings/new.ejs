@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirBnB-New</title>
+</head>
+<body>
+    <form action="/listings/new" method="post">
+        <label for="title">Enter Title</label>
+        <input type="text" name="listing[title]" id="title">
+        <br>
+        <label for="price">Enter Price in Rupees</label>
+        <input type="number" name="listing[price]" id="price">
+        <br>
+        <label for="desc"></label>
+        <textarea name="listing[description]" id="desc" cols="30" rows="10" placeholder="describe your listing"></textarea>
+        <br>
+        <label for="loc">Enter Location</label>
+        <input type="text" name="listing[location]" id="loc">
+        <br>`
+        <label for="country">Enter Country</label>
+        <input type="text" name="listing[country]" id="country">
+        <br>
+        <label for="img">Enter Image's url</label>
+        <input type="text" name="listing[image]" id="img" >
+        <br>
+        <button>Add Listing</button>
+    </form>
+</body>
+</html>

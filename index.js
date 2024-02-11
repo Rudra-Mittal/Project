@@ -26,17 +26,35 @@ app.get("/",(req,res)=>{
 })
 app.get("/listings",async(req,res)=>{
     let listings=await Listing.find();
-    res.render("index.ejs",{listings});
+    res.render("listings/index.ejs",{listings});
+})
+
+
+app.get("/listings/new",(req,res)=>{
+    res.render("listings/new.ejs");
+})
+app.post("/listings/new",async(req,res)=>{
+    // let {title,price,description,location,country,image}=req.body;
+    // console.log("new creating request received",req.body);
+    // let listing= new Listing({
+    //     title:`${title}`,
+    //     price:`${price}`,
+    //     description:`${description}`,
+    //     location:`${location}`,
+    //     country:`${country}`,
+    //     image:`${image}`
+    // })
+    // OR
+    console.log(req.body);
+    const listing = new Listing(req.body.listing);
+    await listing.save();
+    res.redirect("/listings");
 })
 app.get("/listings/:id",async(req,res)=>{
     let {id}=req.params;
-    let listing=await Listing.findById(id);
-    res.render("show.ejs",{listing});
+    let listing= await Listing.findById(id);
+     res.render("listings/show.ejs",{listing});
 })
-
-
-
-
 
 app.listen(port,(req,res)=>{
     console.log(`app is listening on port${port}`);
