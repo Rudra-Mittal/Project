@@ -19,6 +19,7 @@
                 </div>
                 <a href="/listings/<%=listing._id%>"><h3><%= listing.title%></h3></a>
                 <b>Price: &#x20B9;<%=listing.price.toLocaleString("en-IN")%></b>
+                <button><a href="/listings/<%= listing._id%>/update"> Edit this</a></button>
             </div>
         <% } %>
     </div>

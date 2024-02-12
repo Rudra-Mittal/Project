@@ -16,5 +16,8 @@
         <p><%= listing.description %></p>
         <p><%= listing.location %></p>
         <p><%= listing.country %></p>
+        <form action="/listings/<%= listing._id%>/delete?_method=DELETE"  method="post">
+            <button>Delete</button>
+       </form>
 </body>
 </html>
