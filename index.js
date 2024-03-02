@@ -4,6 +4,8 @@ const Listing= require("./models/listingModel.js");
 const path=require("path");
 const mongoURL="mongodb://127.0.0.1:27017/airbnb"
 const app=express();
+engine=require("ejs-mate");
+app.engine("ejs",engine);
 app.set("views",path.join(__dirname,"/views"));
 app.use(express.static(path.join(__dirname,"/public/styles")));
 app.use(express.static(path.join(__dirname,"/public/scripts")));

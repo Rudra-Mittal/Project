@@ -1,16 +1,15 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AirBnB</title>
     <link rel="stylesheet" href="style.css">
-</head>
+</head> -->
+<% layout("/layouts/boilerplate") %>
+
 <body>
     <h1>All Listings</h1>
-    <form action="/listings/new" method="get">
-        <button> Create new Listing</button>
-    </form>
     <div class="container">
         <% for(let listing of listings){ %>
             <div class="listing">
@@ -24,4 +23,4 @@
         <% } %>
     </div>
 </body>
-</html>
+<!-- </html> -->
