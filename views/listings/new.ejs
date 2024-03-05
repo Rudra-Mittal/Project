@@ -1,24 +1,48 @@
 <% layout("/layouts/boilerplate") %>
 <body>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1>Create New Listing</h1>
+
     <form action="/listings/new" method="post">
-        <label for="title">Enter Title</label>
-        <input type="text" name="listing[title]" id="title">
+        <div class="mb-3">
+            <label for="title" form="form-label">Title</label>
+        <input type="text" name="listing[title]" class="form-control"  id="title">
+        </div>
+        
+        <div class="mb-3">
+            <label for="price">Enter Price in Rupees</label>
+            <input type="number" name="listing[price]" class="form-control" id="price">
+
+        </div>
+        
+        <div class="mb-3">
+            <label for="desc"></label>
+            <textarea name="listing[description]" class="form-control" id="desc" placeholder="describe your listing"></textarea>
+
+        </div>
+        
+        <div class="row">
+            <div class="mb-3 col-md-7">
+                <label for="loc">Enter Location</label>
+                <input type="text" name="listing[location]" class="form-control" id="loc">
+            </div>
+            <div class="mb-3 col-md-5">
+                <label for="country">Enter Country</label>
+                <input type="text" name="listing[country]" class="form-control" id="country">
+    
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="img">Enter Image's url</label>
+            <input type="text" name="listing[image]" class="form-control" id="img" >
+
+        </div>
         <br>
-        <label for="price">Enter Price in Rupees</label>
-        <input type="number" name="listing[price]" id="price">
         <br>
-        <label for="desc"></label>
-        <textarea name="listing[description]" id="desc" cols="30" rows="10" placeholder="describe your listing"></textarea>
-        <br>
-        <label for="loc">Enter Location</label>
-        <input type="text" name="listing[location]" id="loc">
-        <br>`
-        <label for="country">Enter Country</label>
-        <input type="text" name="listing[country]" id="country">
-        <br>
-        <label for="img">Enter Image's url</label>
-        <input type="text" name="listing[image]" id="img" >
-        <br>
-        <button>Add Listing</button>
+        <div class="mb-3">
+            <button class="btn btn-dark">Add Listing</button>
+        </div>
     </form>
-</html>
+</div>
+</div>

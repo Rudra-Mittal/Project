@@ -1,10 +1,28 @@
-.listingImage img{
+/* .listingImage img{
     height: 200px;
     width: 200px;
+} */
+
+.plus-jakarta sans-h {
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+body{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    height: 100vh;
+    
+}
+button{
+    background-color: #fe424d !important;
+    border: 2px solid #fe424d !important;
+    padding: 0.1rem 0.9rem; 
+    border-radius: 20px !important;
 }
 .container{
     width: 90vw;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 .listing{
@@ -20,6 +38,9 @@
     /* position: sticky !important;
     top:0 !important; */
 }
+.navbar-nav{
+    background-color: aliceblue !important;
+}
 .fa-compass{
     color:#fe424d;
     font-size: 2rem;
@@ -29,4 +50,70 @@
     color: black !important;
     font-weight: 900;
 
+}
+
+/* Footer */
+.f-info{
+    background-color:rgb(216, 221, 221);
+    height: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:space-evenly;
+}
+.f-info-socials{
+    width: 100%;
+    text-align: center;
+    font-size:1.5rem;
+}
+.f-info-socials i{
+    margin-right:0.9rem;
+    color:#222222;
+    
+}
+.f-info-links{
+    text-align: center;
+    width: 100%;
+}
+.f-info-links a{
+    text-decoration: none;
+    color:#222222;
+    /* transition-delay: 1s; */
+    transition-duration: 0.3s;
+}
+.f-info-links a:hover{
+    /* text-decoration: underline; */
+    color:dodgerblue;
+}
+.card{
+    border: none !important; 
+     border: 2px solid black;
+     /* margin-bottom: 2rem; 
+     margin-left: 1rem; */
+     width: 20rem !important;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    /* width:100% !important; */
+    object-fit: cover !important;
+    height:20rem;
+}
+.card-body{
+    padding:0px !important;
+}
+.listing-link{
+    text-decoration: none;
+    color:#222222;
+}
+.card-img-overlay{
+
+ opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: aliceblue;
+}
+.show-img{
+    /* height: 50vh; */
+    width: 50vw !important;
 }

@@ -1,23 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PropList</title>
-    <!-- below line is giving error, maybe we are linking it with two ejs files -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
-</head>
-<body>
-        <p><%= listing.title %></p>
-        <div class="listingImage">
-            <img src="<%=listing.image%>" alt="image">
+<%- layout("/layouts/boilerplate") %>
+
+    <body>
+        <div class="row mt-3">
+            <div class="col-8 offset-2">
+                <h1>Listing Details</h1>
+            </div>
+            <!-- <div class="col-12 offset-1"> -->
+                <div class="card col-6 offset-2" style="width: 20rem;">
+                    
+                        <img src="<%=listing.image%>" class="card-img-top show-img" alt="PropImage">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%=listing.title%>
+                        </h5>
+                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of -->
+                            <!-- the card's content.</p> -->
+                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+
+
+                <p>&#x20B9;<%= listing.price.toLocaleString("en-IN") %>
+                </p>
+                <p>
+                    <%= listing.description %>
+                </p>
+                <p>
+                    <%= listing.location %>
+                </p>
+                <p>
+                    <%= listing.country %>
+                </p>
+                <a href="/listings/<%= listing._id%>/update" class="btn btn-dark"> Edit this</a>
+                <br>
+                <br>
+                <form action="/listings/<%= listing._id%>/delete?_method=DELETE" method="post">
+                    <button>Delete</button>
+                </form>
+            <!-- </div> -->
         </div>
-        <p>&#x20B9;<%= listing.price.toLocaleString("en-IN") %></p>
-        <p><%= listing.description %></p>
-        <p><%= listing.location %></p>
-        <p><%= listing.country %></p>
-        <form action="/listings/<%= listing._id%>/delete?_method=DELETE"  method="post">
-            <button>Delete</button>
-       </form>
-</body>
-</html>
+    </body>
