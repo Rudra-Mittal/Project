@@ -1,36 +1,58 @@
-<% layout("/layouts/boilerplate") %>
+<%- layout("/layouts/boilerplate") %>
 <body>
     <div class="row">
         <div class="col-8 offset-2">
             <h1>Create New Listing</h1>
 
-    <form action="/listings/new" method="post">
-        <div class="mb-3">
+    <form class="needs-validation"action="/listings/new" method="post" novalidate>
+        <div class="mb-3 position-relative">
             <label for="title" form="form-label">Title</label>
-        <input type="text" name="listing[title]" class="form-control"  id="title">
+        <input type="text" name="listing[title]" class="form-control" id="title" required >
+        <div class="valid-feedback">
+            Looks Fuck'in good!
         </div>
-        
-        <div class="mb-3">
+        <div class="invalid-tooltip">
+            BKL title to bhar
+        </div>
+        </div>
+        <div class="mb-3 position-relative">
             <label for="price">Enter Price in Rupees</label>
-            <input type="number" name="listing[price]" class="form-control" id="price">
-
+            <input type="number" name="listing[price]" class="form-control" id="price" required>
+            <div class="valid-feedback">
+                Waah Waah!
+            </div>
+            <div class="invalid-tooltip">
+                Free Me bechni hai ke
+            </div>
         </div>
         
         <div class="mb-3">
             <label for="desc"></label>
-            <textarea name="listing[description]" class="form-control" id="desc" placeholder="describe your listing"></textarea>
+            <textarea name="listing[description]" class="form-control" id="desc" placeholder="describe your listing" required></textarea>
 
         </div>
         
         <div class="row">
-            <div class="mb-3 col-md-7">
+            <div class="mb-3 col-md-7 position-relative">
                 <label for="loc">Enter Location</label>
-                <input type="text" name="listing[location]" class="form-control" id="loc">
+                <input type="text" name="listing[location]" class="form-control" id="loc" required>
+                <div class="valid-feedback">
+                    Bhadiya Location
+                </div>
+                <div class="invalid-tooltip">
+                     Location to daal vere
+                </div>
             </div>
-            <div class="mb-3 col-md-5">
+            <div class="mb-3 col-md-5 position-relative">
                 <label for="country">Enter Country</label>
-                <input type="text" name="listing[country]" class="form-control" id="country">
-    
+                <input type="text" name="listing[country]" class="form-control" id="country" required>
+
+                <div class="valid-feedback">
+                    Good!
+                </div>
+                <div class="invalid-tooltip">
+                    Country Needed!
+                </div>
             </div>
         </div>
         <div class="mb-3">

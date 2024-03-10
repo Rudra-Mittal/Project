@@ -1,41 +1,63 @@
-<%-layout("/layouts/boilerplate")  %>
+<%- layout("/layouts/boilerplate")  %>
 <body>
     <div class="row"> 
         <div class="col-8 offset-2"> 
             <h1>Edit Your Listing</h1>
-    <form action="/listings/<%= listing._id%>/update?_method=PUT" method="post">
-        <div class="mb-3">
+    <form novalidate action="/listings/<%= listing._id%>/update?_method=PUT" method="post" class="needs-validation">
+        <div class="mb-3 position-relative ">
             <label for="title" form="form-label">Title</label>
-            <input type="text" id="title" class="form-control " name="listing[title]" value="<%=listing.title%>">
+            <input type="text" id="title" class="form-control " name="listing[title]" value="<%=listing.title%>" required>
+            <div class="valid-feedback">
+                Looks Fuck'in good!
+            </div>
+            <div class="invalid-tooltip">
+                BKL title to bhar
+            </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
             <label for="image" class="form-label">Image Url</label>
-            <input type="text" id="image" class="form-control" name="listing[image]" value="<%=listing.image %>">
+            <input type="text" id="image" class="form-control" name="listing[image]" value="<%=listing.image %>" required>
             
         </div>
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
             <label for="price" class="form-label">Price</label>
-            <input type="text" id="price" class="form-control" name="listing[price]" class="form-control" value="<%=listing.price%>">
-            
+            <input type="text" id="price" class="form-control" name="listing[price]" class="form-control" value="<%=listing.price%>" required>
+            <div class="valid-feedback">
+                Waah Waah!
+            </div>
+            <div class="invalid-tooltip">
+                Free Me bechni hai ke
+            </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
             <label for="description" form="form-label">Description</label>
-            <input type="text" id="description" name="listing[description]" class="form-control" value="<%= listing.description%>">
+            <input type="text" id="description" name="listing[description]" class="form-control" value="<%= listing.description%>" required>
             
         </div>
         <div class="row">
-            <div class="mb-3 col-md-8">
+            <div class="mb-3 position-relative col-md-8">
                 <label for="location" form="form-label">Location</label>
-                <input type="text" id="location" name="listing[location]" class="form-control" value="<%=listing.location%>">
-                
+                <input type="text" id="location" name="listing[location]" class="form-control" value="<%=listing.location%>" required>
+                <div class="valid-feedback">
+                    Bhadiya Location
+                </div>
+                <div class="invalid-tooltip">
+                     Location to daal vere
+                </div>
+
             </div>
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 position-relative col-md-4">
                 <label for="country" form="form-label">Country</label>
-                <input type="text" id="country" name="listing[country]" class="form-control" value="<%=listing.country%>">
+                <input type="text" id="country" name="listing[country]" class="form-control" value="<%=listing.country%>" required>
+                <div class="valid-feedback">
+                    Good!
+                </div>
+                <div class="invalid-tooltip">
+                    Country Needed!
+                </div>
             </div>
         </div>
         <button class="btn btn-dark mt-3 mb-3">Edit</button>
         </form>
     </div>
     </div>
-</body>

@@ -117,3 +117,6 @@ button{
     /* height: 50vh; */
     width: 50vw !important;
 }
+.btn:hover{
+    color:white !important;
+}
