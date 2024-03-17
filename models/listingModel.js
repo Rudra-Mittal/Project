@@ -1,4 +1,6 @@
 const moongose=require("mongoose");
+const Schema= moongose.Schema;
+const review= require("./reviewsModel.js");
 const listingSchema=moongose.Schema({
     title:{
         type:String,
@@ -18,7 +20,18 @@ const listingSchema=moongose.Schema({
         type:String,
         required:true
     },
-    country:String
+    country:String,
+    reviews:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:"review"
+        }
+    ]
 });
+listingSchema.post("findOneAndDelete",async(listing)=>{
+    if(listing){
+    await review.deleteMany({_id: {$in : listing.reviews}});
+    }
+})
 const Listing=moongose.model("Listing",listingSchema);
 module.exports=Listing;

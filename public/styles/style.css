@@ -14,10 +14,17 @@ body{
     
 }
 button{
-    background-color: #fe424d !important;
-    border: 2px solid #fe424d !important;
+    /* border: 2px solid #fe424d !important; */
     padding: 0.1rem 0.9rem; 
     border-radius: 20px !important;
+}
+.btn-theme{
+    background-color: #fe424d !important;
+    color:black !important;
+
+}
+.btn-theme:hover{
+    color:white !important;
 }
 .container{
     width: 90vw;
@@ -85,12 +92,18 @@ button{
     /* text-decoration: underline; */
     color:dodgerblue;
 }
-.card{
+.listing-card{
     border: none !important; 
      border: 2px solid black;
      /* margin-bottom: 2rem; 
      margin-left: 1rem; */
-     width: 20rem !important;
+     /* width: 20rem !important; */
+     opacity: 1;
+     transition-duration: 0.1s;
+}
+.listing-card:hover{
+    /* background-color: rgb(212, 212, 212); */
+    opacity: 0.7;
 }
 .card-img-top{
     border-radius: 1rem !important;
@@ -117,6 +130,4 @@ button{
     /* height: 50vh; */
     width: 50vw !important;
 }
-.btn:hover{
-    color:white !important;
-}
+
