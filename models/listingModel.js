@@ -8,9 +8,8 @@ const listingSchema=moongose.Schema({
     },
     description:String,
     image:{
-        default:"https://i.pinimg.com/originals/d0/ed/a9/d0eda9e982736722ec55c41f37134a48.jpg",
-        type:String,
-        set: (v)=> v==""?"https://i.pinimg.com/originals/d0/ed/a9/d0eda9e982736722ec55c41f37134a48.jpg":v
+        url:String,
+        filename:String
     },
     price:{
         type:Number,
@@ -24,9 +23,14 @@ const listingSchema=moongose.Schema({
     reviews:[
         {
             type:Schema.Types.ObjectId,
-            ref:"review"
+            ref:"review",
+            required:false
         }
-    ]
+    ],
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:"User"
+    }
 });
 listingSchema.post("findOneAndDelete",async(listing)=>{
     if(listing){

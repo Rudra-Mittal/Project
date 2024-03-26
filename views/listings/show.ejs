@@ -4,7 +4,7 @@
             <h1>Listing Details</h1>
         </div>
         <div class="listing-card col-6 offset-2" style="width: 20rem;">
-            <img src="<%=listing.image%>" class="card-img-top show-img" alt="PropImage">
+            <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="PropImage">
             <div class="card-body">
                 <h5 class="card-title">
                     <%=listing.title%>
@@ -23,7 +23,9 @@
             <p>
                 <%= listing.country %>
             </p>
+            <p><b>OWNER:</b><%= listing.owner.username %></p>
             <!-- Button Group for Edit and Delete Buttons -->
+            <% if(currUser&&currUser._id.equals(listing.owner.id)){ %>
             <div class="col">
                 <div class="btn-group" role="group" aria-label="Edit and Delete Buttons">
                     <a href="/listings/<%= listing._id%>/update"><button class="btn btn-theme">Edit</button></a>
@@ -33,15 +35,30 @@
                     </form>
                 </div>
             </div>
+            <% } %>
         </div>
         <div class="col-8 offset-2">
-            <hr>
-            <h3> Leave a review</h3>
+            <% if(currUser){ %>
+                <hr>
+                <h3> Leave a review</h3>
+                
             <form novalidate class="needs-validation" action="/listings/<%= listing._id%>/reviews" method="post">
                 <div class="mb-3 position-relative">
                     <label for="rating" class="form-label">Rate</label>
-                    <input type="range" name="review[rating]" class="form-range form-control" min="1" max="5"
-                        id="rating">
+                        <fieldset class="starability-slot">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                            <input type="radio" id="second-rate1" name="review[rating]" value="1" />
+                            <label for="second-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="second-rate2" name="review[rating]" value="2" />
+                            <label for="second-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="second-rate3" name="review[rating]" value="3" />
+                            <label for="second-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="second-rate4" name="review[rating]" value="4" />
+                            <label for="second-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="second-rate5" name="review[rating]" value="5" />
+                            <label for="second-rate5" title="Amazing">5 stars</label>
+                          </fieldset>
+                        
                     <div class="mb-3 mt-3">
                         <label class="form-label" for="comment">Review</label>
                         <textarea name="review[comment]" cols="30" id="comment" class="form-control" rows="10"
@@ -52,15 +69,17 @@
                     </div>
                     <button class="btn btn-theme mb-3">Submit Review</button>
             </form>
+            <% } %>
             <hr>
             <p><b>All Reviews</b></p>
             <div class="row">
             <% for(review of listing.reviews) {%>
                 <div class="card mt-3 ms-3 col-5">
                   <div class="card-body">
-                    <h5 class="card-title">Anonymus</h5>
+                    <h5 class="card-title">@<%=review.author.username%></h5>
                     <p class="card-text mb-0"><%=review.comment%></p>
-                    <p class="card-text"><%=review.rating%> &star;</p>
+    
+                    <p class="card-text starability-result" data-rating="<%=review.rating%>"></p>
                   </div>
                   <form action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
                     <button class="btn btn-dark col-3 offset-9">Delete</button>

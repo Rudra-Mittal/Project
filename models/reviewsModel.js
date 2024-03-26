@@ -1,6 +1,10 @@
 const moongose=require("mongoose");
 const Schema= moongose.Schema;
 const reviewSchema= moongose.Schema({
+    author:{
+        type:Schema.Types.ObjectId,
+        ref:"User"
+    },
     comment:{
         type: String
     },
