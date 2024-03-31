@@ -23,6 +23,29 @@ button{
     color:black !important;
 
 }
+#filters{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.filter{
+    margin-right: 3rem;
+    text-align: center;
+    opacity: 0.7;
+    transition-duration: 10ms;
+}
+.filter:hover{
+    opacity: 1;
+    border-bottom: 0.3px solid black;
+    /* text-decoration: underline; */
+    cursor: pointer;
+}
+.filter i{
+    font-size: large;
+}
+.filter p{
+    font-size: small;
+}
 .btn-theme:hover{
     color:white !important;
 }
@@ -45,9 +68,6 @@ button{
     /* position: sticky !important;
     top:0 !important; */
 }
-.navbar-nav{
-    background-color: aliceblue !important;
-}
 .fa-compass{
     color:#fe424d;
     font-size: 2rem;
@@ -61,7 +81,7 @@ button{
 
 /* Footer */
 .f-info{
-    background-color:rgb(216, 221, 221);
+    background-color:#f9fbfb;
     height: 8rem;
     display: flex;
     flex-wrap: wrap;
@@ -130,7 +150,16 @@ button{
     /* height: 50vh; */
     width: 50vw !important;
 }
-
+.tax{
+    display: none;
+}
+.tax-switch{
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
 #map{
     height: 300px;
     width: 600px;

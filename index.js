@@ -2,16 +2,15 @@ require("dotenv").config();
 const express=require("express");
 const mongoose=require("mongoose");
 const path=require("path");
-const mongoURL="mongodb://127.0.0.1:27017/airbnb"
+// const mongoURL="mongodb://127.0.0.1:27017/airbnb"
+const dbUrl=process.env.CLOUD_DB_URL;
 const app=express();
 const session= require("express-session");
+const MongoStore = require('connect-mongo');
 const flash =require("connect-flash");
 app.use(express.static(path.join(__dirname,"/public/styles")));
 app.use(express.static(path.join(__dirname,"/public/scripts")));
 const ExpressError=require("./utils/ExpressError.js");
-// const {listingSchema}=require("./schemaValidate.js");
-// const {reviewSchema}=require("./schemaValidate.js");
-// const review= require("./models/reviewsModel.js");
 engine=require("ejs-mate");
 app.engine("ejs",engine);
 app.set("views",path.join(__dirname,"/views"));
@@ -26,10 +25,23 @@ const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User= require("./models/userModel.js");
 const port=8080;
+const store= MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:process.env.SECRET,
+    },
+    touchAfter:24*3600,
+});
+store.on("error",(err)=>{
+    console.log("Error in Session Store",err);
+    res.send("Error");
+     throw  new ExpressError(500,"Internal server error");
+})
 const sessionOptions={
-    secret:"mysupersecretcode",
+    store,
+    secret:process.env.SECRET,
     resave:false,
-    saveUninitialized:true,
+    saveUninitialized:false,
     cookie:{
         expires:Date.now()+ 7*24*60*60*1000,
         httpOnly:true
@@ -45,7 +57,7 @@ main()
 });
 
 async function main(){
-    await mongoose.connect(mongoURL);
+    await mongoose.connect(dbUrl);
 }
 app.use(session(sessionOptions));
 app.use(flash());
@@ -59,14 +71,14 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-app.get("/",(req,res)=>{
-    res.send("you are on home page");
-})
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
     res.locals.currUser=req.user;
     next();
+})
+app.get("/",(req,res)=>{
+    res.send("you are on home page");
 })
 
 
@@ -84,5 +96,4 @@ app.listen(port,(req,res)=>{
 app.use((err,req,res,next)=>{
     let{status=500,message="Something went Wrong"}=err;
     res.render("listings/error.ejs",{status,message});
-    // res.status(status).send(message);
 })
