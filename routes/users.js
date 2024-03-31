@@ -8,7 +8,6 @@ const userControllers=require("../Controllers/usercontrollers.js");
 router.route("/signup")
 .get(wrapAsync(userControllers.getSignUp))
 .post(wrapAsync(userControllers.postSignUp));
-
 router.route("/login")
 .get(wrapAsync(userControllers.getLogin))
 .post(savedRedirectUrl,passport.authenticate("local",{failureRedirect:"/login",failureFlash:true}), wrapAsync(userControllers.postLogin));

@@ -1,5 +1,31 @@
 const Listing = require("../models/listingModel.js");
 const ExpressError = require("../utils/ExpressError.js");
+const { URLSearchParams } = require('url');
+async function runGeocode(point) {
+    // console.log(point);
+    try {
+        const fetch = await import('node-fetch');
+        const queryParams = new URLSearchParams({
+            q:`${point}`,
+            locale: 'en',
+            limit: '1',
+            reverse: 'false',
+            debug: 'false',
+            // point: '',
+            provider: 'default',
+            key: process.env.MAP_API_KEY
+        }).toString();
+
+        const response = await fetch.default(`https://graphhopper.com/api/1/geocode?${queryParams}`, {
+            method: 'GET'
+        });
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
 module.exports.index=async (req, res) => {
     let listings = await Listing.find();
     res.render("listings/index.ejs", { listings });
@@ -20,10 +46,25 @@ module.exports.putUpdate=async (req, res) => {
         throw new ExpressError(400, "No/incomplete data Entered for listings");
     }
     let { id } = req.params;
+    // let listing= await Listing.findById(id);
     let url= req.file.path;
     let filename= req.file.filename;
     req.body.listing.image={url,filename};
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    let point=req.body.listing.location;
+    let geocodeData;
+    try {
+        geocodeData = await runGeocode(point);
+        if(!geocodeData.hits){
+            throw new ExpressError(400,"Location does'nt exist");
+        }
+    } catch (error) {
+        console.error("Error during geocoding:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+    let lat=geocodeData.hits[0].point.lat;
+    let lng=geocodeData.hits[0].point.lng;
+    req.body.listing.coordinates={lat,lng}
+    await Listing.findByIdAndUpdate(id,{...req.body.listing});
     req.flash("success", "Review Updated");
     res.redirect(`/listings/${id}`);
 };
@@ -35,7 +76,22 @@ module.exports.postCreate=async (req, res, next) => {
     let filename= req.file.filename;
     req.body.listing.owner = req.user;
     const listing = new Listing(req.body.listing);
+    // console.log(point);
+    let point=listing.location;
+    let geocodeData;
+    try {
+        geocodeData = await runGeocode(point);
+        if(!geocodeData.hits){
+            throw new ExpressError(400,"Location does'nt exist");
+        }
+    } catch (error) {
+        console.error("Error during geocoding:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
     listing.image={url,filename};
+    listing.coordinates.lat=geocodeData.hits[0].point.lat;
+    listing.coordinates.lng=geocodeData.hits[0].point.lng;
+    // res.send(listing);
     await listing.save();
     req.flash("success", "New Listing Created");
     res.redirect("/listings");

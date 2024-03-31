@@ -30,6 +30,14 @@ const listingSchema=moongose.Schema({
     owner:{
         type:Schema.Types.ObjectId,
         ref:"User"
+    },
+    coordinates:{
+        lat:{
+            type:Number
+        },
+        lng:{
+            type:Number
+        }
     }
 });
 listingSchema.post("findOneAndDelete",async(listing)=>{

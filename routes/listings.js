@@ -7,6 +7,7 @@ const multer=require("multer");
 const {storage}=require("../CloudConfig.js");
 const upload=multer({storage:storage});
 
+
 router.get("/", wrapAsync(listingControllers.index));
 
 router.route("/new")
@@ -19,4 +20,7 @@ router.route("/:id/update")
 router.delete("/:id/delete", isLoggedIn, isOwner, wrapAsync(listingControllers.delete));
 router.get("/:id", wrapAsync(listingControllers.show));
 
+router.get("/geocode/:point", async (req, res) => {
+   
+});
 module.exports = router;

@@ -1,4 +1,7 @@
 <%- layout("/layouts/boilerplate") %>
+<script>
+    const listing= <%- JSON.stringify(listing)%>;
+</script>
     <div class="row mt-3">
         <div class="col-8 offset-2">
             <h1>Listing Details</h1>
@@ -24,6 +27,8 @@
                 <%= listing.country %>
             </p>
             <p><b>OWNER:</b><%= listing.owner.username %></p>
+            <div id="map" class="col-2 offset-2">
+            </div>
             <!-- Button Group for Edit and Delete Buttons -->
             <% if(currUser&&currUser._id.equals(listing.owner.id)){ %>
             <div class="col">
@@ -37,6 +42,7 @@
             </div>
             <% } %>
         </div>
+        
         <div class="col-8 offset-2">
             <% if(currUser){ %>
                 <hr>
